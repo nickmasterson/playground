@@ -41,8 +41,21 @@ else
     theta = 360 - acosd(term3);
 end
 
-u0 = omega / theta; % not correct 3/21/22
-l0 = OMEGA / u0; % not correct 3/21/22
+true_lon = omega + theta; 
+
+if true_lon < 359.5
+    u0 = true_lon;
+else 
+    u0 = 360 - true_lon;
+end
+    
+true_lat = OMEGA + u0;
+if true_lat < 359.5
+    l0 = true_lat;
+else
+    l0 = 360-true_lat;
+end
+
 if e == 0
     orbit_type = 'circular';
 elseif e < 1
